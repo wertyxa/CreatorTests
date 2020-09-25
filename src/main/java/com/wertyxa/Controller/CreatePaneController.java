@@ -1,0 +1,236 @@
+package com.wertyxa.Controller;
+
+import com.wertyxa.Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+
+import java.net.URL;
+import java.util.Iterator;
+import java.util.ResourceBundle;
+
+public class CreatePaneController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private MenuBar menuBar;
+
+    @FXML
+    private ComboBox<Subject> listSubject;
+
+    @FXML
+    private ComboBox<Group> listGroup;
+
+    @FXML
+    private TableView<Answer> listAnswers;
+
+    @FXML
+    private ListView<Question> listQuestion;
+
+    @FXML
+    private TextArea textQuestion;
+
+    @FXML
+    private ListView<TestName> listNameTest;
+
+    ObservableList <Subject> emptySubject = FXCollections.observableArrayList();
+    ObservableList <Group> emptyGroups = FXCollections.observableArrayList();
+    ObservableList <Answer> emptyAnswer = FXCollections.observableArrayList();
+    ObservableList <Question> emptyQuestion = FXCollections.observableArrayList();
+    ObservableList <TestName> emptyTestName = FXCollections.observableArrayList();
+
+    AllTests allTests = new AllTests(FXCollections.observableArrayList());
+
+    @FXML
+    void initialize() {
+        listSubject.setItems(emptySubject);
+        listAnswers.setItems(emptyAnswer);
+        listQuestion.setItems(emptyQuestion);
+        listNameTest.setItems(emptyTestName);
+        listGroup.setItems(emptyGroups);
+        getAllList();
+        listSubject.setItems(allTests.getListSubject());
+       // listSubject.setEditable(true);
+      //  listGroup.setEditable(true);
+
+ /*       listGroup.setDisable(true);
+        listNameTest.setDisable(true);
+        listQuestion.setDisable(true);
+        listAnswers.setDisable(true);
+*/
+        //  Обробник подій для списку предметів
+        SingleSelectionModel<Subject> subjectSelectionModel = listSubject.getSelectionModel();
+        subjectSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            //Save
+            if (/*Subject*/oldValue!=null){
+
+                if (listAnswers.getItems()!=emptyAnswer){
+                    listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
+                    listAnswers.setItems(emptyAnswer);
+                    listAnswers.refresh();
+                    listAnswers.setDisable(false);
+                    if (listQuestion.getItems()!=emptyQuestion){
+                        listNameTest.getSelectionModel().getSelectedItem().setListQuestions(listQuestion.getItems());
+                        listQuestion.setItems(emptyQuestion);
+                        listQuestion.setDisable(false);
+                        if (listNameTest.getItems()!=emptyTestName){
+                            listGroup.getValue().setListTestNames(listNameTest.getItems());
+                            listNameTest.setItems(emptyTestName);
+                            listNameTest.setDisable(false);
+                            if (listGroup.getItems()!=emptyGroups){
+                                oldValue.setListGroups(listGroup.getItems());
+                                listGroup.setItems(emptyGroups);
+                            }
+                        }
+                    }
+                }
+
+
+            }
+            if (!newValue.getListGroups().equals(emptyGroups)) {
+                listGroup.setItems(newValue.getListGroups());
+            }
+
+        });
+        //  Обробник подій для списку груп
+        SingleSelectionModel<Group> groupSelectionModel = listGroup.getSelectionModel();
+        groupSelectionModel.selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+                if (oldValue!=null){
+                    if (listAnswers.getItems()!=emptyAnswer){
+                        listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
+                        listAnswers.setItems(emptyAnswer);
+                        listAnswers.refresh();
+                        listAnswers.setDisable(false);
+                        if (listQuestion.getItems()!=emptyQuestion){
+                            listNameTest.getSelectionModel().getSelectedItem().setListQuestions(listQuestion.getItems());
+                            listQuestion.setItems(emptyQuestion);
+                            listQuestion.setDisable(false);
+                            if (listNameTest.getItems()!=emptyTestName){
+                                oldValue.setListTestNames(listNameTest.getItems());
+                                listNameTest.setItems(emptyTestName);
+                                listNameTest.setDisable(false);
+                            }
+                        }
+                    }
+                }
+
+                if (!newValue.getListTestNames().equals(emptyGroups)){
+                    listNameTest.setItems(newValue.getListTestNames());
+                }
+
+        }));
+
+        //  Обробник подій для списку Назв тестів
+        MultipleSelectionModel<TestName> testNameSelectionModel = listNameTest.getSelectionModel();
+        testNameSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (oldValue!=null){
+                if (!listAnswers.getItems().equals(emptyAnswer)){
+                    listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
+                    listAnswers.setItems(emptyAnswer);
+                    listAnswers.refresh();
+                    listAnswers.setDisable(false);
+                    if (listQuestion.getItems()!=emptyQuestion){
+                        oldValue.setListQuestions(listQuestion.getItems());
+                        listQuestion.setItems(emptyQuestion);
+                        listQuestion.setDisable(false);
+                    }
+                }
+            }
+            if (newValue.getListQuestions().equals(emptyQuestion)){
+                newValue.getListQuestions().add(new Question(999,"",emptyAnswer));
+                listQuestion.setItems(newValue.getListQuestions());
+            }else {
+                listQuestion.setItems(newValue.getListQuestions());
+            }
+        });
+
+        //  Обробник подій для списку Запитань
+        MultipleSelectionModel<Question> questionSelectionModel = listQuestion.getSelectionModel();
+        questionSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue!=null){
+                if (!listAnswers.getItems().equals(emptyAnswer)){
+                    oldValue.setListAnswers(listAnswers.getItems());
+                    listAnswers.setItems(emptyAnswer);
+                    listAnswers.refresh();
+                    listAnswers.setDisable(false);
+                }
+            }
+
+            if (newValue.getNumQuestion() == 999){
+                newValue.setNumQuestion(listQuestion.getItems().size());
+                textQuestion.setText(newValue.getTextQuestion());
+                listQuestion.getItems().add(new Question(999,"",emptyAnswer));
+            }else {
+                textQuestion.setText(newValue.getTextQuestion());
+                listAnswers.setItems(newValue.getListAnswers());
+                listAnswers.refresh();
+            }
+
+        });
+
+        textQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
+            listQuestion.getSelectionModel().getSelectedItem().setTextQuestion(newValue);
+        });
+    }
+
+    private void getAllList() {
+        allTests.setListSubject(FXCollections.observableArrayList(
+                new Subject("Math",FXCollections.observableArrayList(
+                        new Group("ОПЗ-16",FXCollections.observableArrayList(
+                                new TestName("Трикутники",FXCollections.observableArrayList()),
+                                new TestName("Прямокутники",FXCollections.observableArrayList()),
+                                new TestName("Фігури",FXCollections.observableArrayList())
+                        )),
+                        new Group("ЗВК-25",FXCollections.observableArrayList(
+                                new TestName("Фігури",FXCollections.observableArrayList()),
+                                new TestName("Трикутники",FXCollections.observableArrayList()),
+                                new TestName("Прямокутники",FXCollections.observableArrayList())
+                        )),
+                        new Group("ВШП-41",FXCollections.observableArrayList(
+                                new TestName("Прямокутники",FXCollections.observableArrayList()),
+                                new TestName("Фігури",FXCollections.observableArrayList()),
+                                new TestName("Трикутники",FXCollections.observableArrayList())
+                        )))),
+                new Subject("Ukrainian lang",FXCollections.observableArrayList(
+                        new Group("ОПЗ-12",FXCollections.observableArrayList(
+                                new TestName("Словосполучники",FXCollections.observableArrayList()),
+                                new TestName("Прості речення",FXCollections.observableArrayList()),
+                                new TestName("Складені речення",FXCollections.observableArrayList())
+                        )),
+                        new Group("ЗВК-22",FXCollections.observableArrayList(
+                                new TestName("Складені речення",FXCollections.observableArrayList()),
+                                new TestName("Прості речення",FXCollections.observableArrayList()),
+                                new TestName("Словосполучники",FXCollections.observableArrayList())
+                        )),
+                        new Group("ВШП-42",FXCollections.observableArrayList(
+                                new TestName("Прості речення",FXCollections.observableArrayList()),
+                                new TestName("Складені речення",FXCollections.observableArrayList()),
+                                new TestName("Словосполучники",FXCollections.observableArrayList())
+                        )))),
+                new Subject("History",FXCollections.observableArrayList(
+                        new Group("ОПЗ-13",FXCollections.observableArrayList(
+                                new TestName("Історія1",FXCollections.observableArrayList()),
+                                new TestName("Історія12",FXCollections.observableArrayList()),
+                                new TestName("Історія13",FXCollections.observableArrayList())
+                        )),
+                        new Group("ЗВК-23",FXCollections.observableArrayList(
+                                new TestName("Історія13",FXCollections.observableArrayList()),
+                                new TestName("Історія12",FXCollections.observableArrayList()),
+                                new TestName("Історія1",FXCollections.observableArrayList())
+                        )),
+                        new Group("ВШП-43",FXCollections.observableArrayList(
+                                new TestName("Історія12",FXCollections.observableArrayList()),
+                                new TestName("Історія1",FXCollections.observableArrayList()),
+                                new TestName("Історія13",FXCollections.observableArrayList())
+                        ))))));
+    }
+}

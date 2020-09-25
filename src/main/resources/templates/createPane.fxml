@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wertyxa.Controller.CreatePaneController">
+   <children>
+      <MenuBar fx:id="menuBar" layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="872.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane layoutX="7.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <Label layoutX="122.0" layoutY="37.0" text="Предмет">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="808.0" layoutY="38.0" text="Група">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="listAnswers" editable="true" layoutX="102.0" layoutY="288.0" prefHeight="334.0" prefWidth="1149.0" tableMenuButtonVisible="true" />
+            <ListView fx:id="listQuestion" layoutX="14.0" layoutY="199.0" prefHeight="423.0" prefWidth="65.0" />
+            <TextArea fx:id="textQuestion" layoutX="102.0" layoutY="199.0" prefHeight="80.0" prefWidth="1149.0" promptText="Введіть текст запитання">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+            <Label layoutX="13.0" layoutY="173.0" text="№ питання" />
+            <ListView fx:id="listNameTest" layoutX="102.0" layoutY="78.0" prefHeight="95.0" prefWidth="1149.0" />
+            <ComboBox fx:id="listGroup" layoutX="874.0" layoutY="37.0" prefHeight="30.0" prefWidth="200.0" />
+            <ComboBox fx:id="listSubject" layoutX="203.0" layoutY="37.0" prefHeight="30.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
