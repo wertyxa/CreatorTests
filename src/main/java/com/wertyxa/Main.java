@@ -37,6 +37,8 @@ public class Main extends Application {
         rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         globalStage.setScene(scene);
+        globalStage.setWidth(scene.getWidth());
+        globalStage.setHeight(scene.getHeight());
         globalStage.show();
     }
 
@@ -45,6 +47,8 @@ public class Main extends Application {
         rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         globalStage.setScene(scene);
+        globalStage.setWidth(scene.getWidth());
+        globalStage.setHeight(scene.getHeight());
         globalStage.show();
     }
 

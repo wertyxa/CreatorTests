@@ -1,10 +1,17 @@
 package com.wertyxa.Controller;
 
 import com.wertyxa.Model.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -177,9 +184,71 @@ public class CreatePaneController {
 
         });
 
+
+        //  Обробник подій для тексту  запитання
         textQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
             listQuestion.getSelectionModel().getSelectedItem().setTextQuestion(newValue);
         });
+
+        configTabelAnswer();
+
+        TableSelectionModel<Answer> answerTableSelectionModel = listAnswers.getSelectionModel();
+        answerTableSelectionModel.selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+
+        });
+
+
+    }
+
+    private void configTabelAnswer() {
+        listAnswers.setEditable(true);
+
+        TableColumn<Answer, String> textAnswerCol = new TableColumn<>("Відповідь");
+        TableColumn<Answer, Boolean> rightAnswerCol = new TableColumn<>("пр");
+
+        // === Text Answer (TextField) ===
+        textAnswerCol.setCellValueFactory(new PropertyValueFactory<>("textAnswer"));
+        textAnswerCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        textAnswerCol.setMinWidth(550);
+
+        // On cell edit commit (for Text Answer column)
+
+        textAnswerCol.setOnEditCommit((TableColumn.CellEditEvent<Answer,String> event)->{
+            TablePosition<Answer, String> pos = event.getTablePosition();
+            String newTextAnswer = event.getNewValue();
+
+            int row = pos.getRow();
+            Answer answer = event.getTableView().getItems().get(row);
+            answer.setTextAnswer(newTextAnswer);
+        });
+
+        rightAnswerCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Answer, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Answer, Boolean> param) {
+                Answer answer = param.getValue();
+
+                SimpleBooleanProperty booleanProp = new SimpleBooleanProperty(answer.isRightAnswer());
+
+
+                booleanProp.addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        answer.setRightAnswer(newValue);
+                    }
+                });
+                return booleanProp;
+            }
+        });
+
+        rightAnswerCol.setCellFactory(new Callback<TableColumn<Answer, Boolean>, TableCell<Answer, Boolean>>() {
+            @Override
+            public TableCell<Answer, Boolean> call(TableColumn<Answer, Boolean> param) {
+                CheckBoxTableCell<Answer, Boolean> cell = new CheckBoxTableCell<>();
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        });
+        listAnswers.getColumns().addAll(textAnswerCol,rightAnswerCol);
     }
 
     private void getAllList() {
