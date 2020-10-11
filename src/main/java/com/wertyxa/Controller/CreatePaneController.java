@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -46,6 +47,10 @@ public class CreatePaneController {
     private TextArea textQuestion;
 
     @FXML
+    private TextField textNewNameTests;
+
+
+    @FXML
     private ListView<TestName> listNameTest;
 
     ObservableList <Subject> emptySubject = FXCollections.observableArrayList();
@@ -76,62 +81,11 @@ public class CreatePaneController {
         //  Обробник подій для списку предметів
         SingleSelectionModel<Subject> subjectSelectionModel = listSubject.getSelectionModel();
         subjectSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            //Save
-            if (/*Subject*/oldValue!=null){
-
-                if (listAnswers.getItems()!=emptyAnswer){
-                    listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
-                    listAnswers.setItems(emptyAnswer);
-                    listAnswers.refresh();
-                    listAnswers.setDisable(false);
-                    if (listQuestion.getItems()!=emptyQuestion){
-                        listNameTest.getSelectionModel().getSelectedItem().setListQuestions(listQuestion.getItems());
-                        listQuestion.setItems(emptyQuestion);
-                        listQuestion.setDisable(false);
-                        if (listNameTest.getItems()!=emptyTestName){
-                            listGroup.getValue().setListTestNames(listNameTest.getItems());
-                            listNameTest.setItems(emptyTestName);
-                            listNameTest.setDisable(false);
-                            if (listGroup.getItems()!=emptyGroups){
-                                oldValue.setListGroups(listGroup.getItems());
-                                listGroup.setItems(emptyGroups);
-                            }
-                        }
-                    }
-                }
-
-
-            }
-            if (!newValue.getListGroups().equals(emptyGroups)) {
-                listGroup.setItems(newValue.getListGroups());
-            }
 
         });
         //  Обробник подій для списку груп
         SingleSelectionModel<Group> groupSelectionModel = listGroup.getSelectionModel();
         groupSelectionModel.selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-                if (oldValue!=null){
-                    if (listAnswers.getItems()!=emptyAnswer){
-                        listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
-                        listAnswers.setItems(emptyAnswer);
-                        listAnswers.refresh();
-                        listAnswers.setDisable(false);
-                        if (listQuestion.getItems()!=emptyQuestion){
-                            listNameTest.getSelectionModel().getSelectedItem().setListQuestions(listQuestion.getItems());
-                            listQuestion.setItems(emptyQuestion);
-                            listQuestion.setDisable(false);
-                            if (listNameTest.getItems()!=emptyTestName){
-                                oldValue.setListTestNames(listNameTest.getItems());
-                                listNameTest.setItems(emptyTestName);
-                                listNameTest.setDisable(false);
-                            }
-                        }
-                    }
-                }
-
-                if (!newValue.getListTestNames().equals(emptyGroups)){
-                    listNameTest.setItems(newValue.getListTestNames());
-                }
 
         }));
 
@@ -139,48 +93,11 @@ public class CreatePaneController {
         MultipleSelectionModel<TestName> testNameSelectionModel = listNameTest.getSelectionModel();
         testNameSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (oldValue!=null){
-                if (!listAnswers.getItems().equals(emptyAnswer)){
-                    listQuestion.getSelectionModel().getSelectedItem().setListAnswers(listAnswers.getItems());
-                    listAnswers.setItems(emptyAnswer);
-                    listAnswers.refresh();
-                    listAnswers.setDisable(false);
-                    if (listQuestion.getItems()!=emptyQuestion){
-                        oldValue.setListQuestions(listQuestion.getItems());
-                        listQuestion.setItems(emptyQuestion);
-                        listQuestion.setDisable(false);
-                    }
-                }
-            }
-            if (newValue.getListQuestions().equals(emptyQuestion)){
-                newValue.getListQuestions().add(new Question(999,"",emptyAnswer));
-                listQuestion.setItems(newValue.getListQuestions());
-            }else {
-                listQuestion.setItems(newValue.getListQuestions());
-            }
         });
 
         //  Обробник подій для списку Запитань
         MultipleSelectionModel<Question> questionSelectionModel = listQuestion.getSelectionModel();
         questionSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue!=null){
-                if (!listAnswers.getItems().equals(emptyAnswer)){
-                    oldValue.setListAnswers(listAnswers.getItems());
-                    listAnswers.setItems(emptyAnswer);
-                    listAnswers.refresh();
-                    listAnswers.setDisable(false);
-                }
-            }
-
-            if (newValue.getNumQuestion() == 999){
-                newValue.setNumQuestion(listQuestion.getItems().size());
-                textQuestion.setText(newValue.getTextQuestion());
-                listQuestion.getItems().add(new Question(999,"",emptyAnswer));
-            }else {
-                textQuestion.setText(newValue.getTextQuestion());
-                listAnswers.setItems(newValue.getListAnswers());
-                listAnswers.refresh();
-            }
 
         });
 
@@ -189,15 +106,7 @@ public class CreatePaneController {
         textQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
             listQuestion.getSelectionModel().getSelectedItem().setTextQuestion(newValue);
         });
-
         configTabelAnswer();
-
-        TableSelectionModel<Answer> answerTableSelectionModel = listAnswers.getSelectionModel();
-        answerTableSelectionModel.selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-
-        });
-
-
     }
 
     private void configTabelAnswer() {
@@ -301,5 +210,29 @@ public class CreatePaneController {
                                 new TestName("Історія1",FXCollections.observableArrayList()),
                                 new TestName("Історія13",FXCollections.observableArrayList())
                         ))))));
+    }
+
+    public void addNewNameTest(ActionEvent actionEvent) {
+        
+    }
+
+    public void delSelectionGroup(ActionEvent actionEvent) {
+
+    }
+
+    public void addNewGroup(ActionEvent actionEvent) {
+
+    }
+
+    public void delSelectionSubject(ActionEvent actionEvent) {
+
+    }
+
+    public void addNewSubject(ActionEvent actionEvent) {
+
+    }
+
+    public void addNewQuestion(ActionEvent actionEvent) {
+
     }
 }
