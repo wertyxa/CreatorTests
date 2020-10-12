@@ -98,7 +98,16 @@ public class CreatePaneController {
         //  Обробник подій для списку Запитань
         MultipleSelectionModel<Question> questionSelectionModel = listQuestion.getSelectionModel();
         questionSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
+            if(oldValue!=null)oldValue.setListAnswers(listAnswers.getItems());
+            if (newValue!=null) {
+                textQuestion.setText(newValue.getTextQuestion());
+                listAnswers.setItems(newValue.getListAnswers());
+                listAnswers.refresh();
+            }else {
+                textQuestion.setText("");
+                listAnswers.setItems(emptyAnswer);
+                listAnswers.refresh();
+            }
         });
 
 
