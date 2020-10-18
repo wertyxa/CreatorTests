@@ -370,11 +370,13 @@ public class CreatePaneController {
     }
 
     public void addNewNameTest(ActionEvent actionEvent) {
-        
+        TestName newTestName = new TestName(textNewNameTests.getText(),emptyQuestion);
+        listNameTest.getItems().add(newTestName);
     }
 
     public void delSelectionGroup(ActionEvent actionEvent) {
-
+        listGroup.getItems().remove(listGroup.getSelectionModel().getSelectedIndex());
+        listGroup.getSelectionModel().clearSelection();
     }
 
     public void addNewGroup(ActionEvent actionEvent) {
