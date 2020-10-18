@@ -87,12 +87,111 @@ public class CreatePaneController {
         //  Обробник подій для списку предметів
         SingleSelectionModel<Subject> subjectSelectionModel = listSubject.getSelectionModel();
         subjectSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue==null){
+                System.out.println("Немає попередно вибраного предмету");
+            }else {
+                if (listAnswers==null||listAnswers.equals(emptyAnswer)){
+                    System.out.println("Список відповідей порожній");
+                }else {
+                    if(selectedQuestion()!=null){
+                        selectedQuestion().setListAnswers(listAnswers.getItems());
+                    }else {
+                        System.out.println("Запитання не вибрано");
+                    }
+                }
+                /**
+                 * save Question
+                 * */
+                if(listQuestion==null||listQuestion.equals(emptyQuestion)){
+                    System.out.println("Список запитань порожній");
+                }else {
+                    if (selectedTestName()!=null){
+                        selectedTestName().setListQuestions(listQuestion.getItems());
+                    }else {
+                        System.out.println("Назву тесту не вибрано");
+                    }
+                }
+                /**
+                 * save NameTest
+                 * */
 
+                if (listNameTest==null||listNameTest.equals(emptyTestName)){
+                    System.out.println("Список назв тестів порожній");
+                }else {
+                    if (selectedGroup()!=null){
+                    selectedGroup().setListTestNames(listNameTest.getItems());
+                    }else {
+                        System.out.println("Групу не вибрано");
+                    }
+                }
+                /*
+                * save Group
+                * */
+                if (listGroup==null||listGroup.equals(emptyGroups)){
+                    System.out.println("Список груп порожній");
+                }else {
+                    oldValue.setListGroups(listGroup.getItems());
+                }
+                /*
+                * save Subject
+                * */
+            }
+            if (newValue==null){
+                Subject empty = new Subject("null",emptyGroups);
+                newValue=empty;
+                System.out.println("Вибраний прежмет чистий");
+            }
+            listGroup.setItems(newValue.getListGroups());
         });
         //  Обробник подій для списку груп
         SingleSelectionModel<Group> groupSelectionModel = listGroup.getSelectionModel();
         groupSelectionModel.selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue==null){
+                System.out.println("Немає попередьно вибраної групи");
+            }else {
+                if (listAnswers==null||listAnswers.equals(emptyAnswer)){
+                    System.out.println("Список відповідей порожній");
+                }else {
+                    if(selectedQuestion()!=null){
+                        selectedQuestion().setListAnswers(listAnswers.getItems());
+                    }else {
+                        System.out.println("Запитання не вибрано");
+                    }
+                }
+                /**
+                 * save Question
+                 * */
+                if(listQuestion==null||listQuestion.equals(emptyQuestion)){
+                    System.out.println("Список запитань порожній");
+                }else {
+                    if (selectedTestName()!=null){
+                        selectedTestName().setListQuestions(listQuestion.getItems());
+                    }else {
+                        System.out.println("Назву тесту не вибрано");
+                    }
+                }
+                /**
+                 * save NameTest
+                 * */
 
+                if (listNameTest==null||listNameTest.equals(emptyTestName)){
+                    System.out.println("Список назв тестів порожній");
+                }else {
+                    oldValue.setListTestNames(listNameTest.getItems());
+                }
+                /**
+                 * save Group
+                 * */
+            }
+            if(newValue==null){
+                Group empty = new Group("",emptyTestName);
+                newValue=empty;
+                System.out.println("Вибрана гупа порожня");
+            }
+            listNameTest.setItems(newValue.getListTestNames());
+            /**
+             * load NameTest
+             * */
         }));
 
         //  Обробник подій для списку Назв тестів
@@ -101,27 +200,34 @@ public class CreatePaneController {
             if (oldValue==null){
                 System.out.println("Немає поперднього Назв тесту");
             }else {
-                /**
-                 * save
-                 */
                 if (listAnswers==null||listAnswers.equals(emptyAnswer)){
                     System.out.println("Список відповідей порожній");
                 }
                 else {if(selectedQuestion()!=null){selectedQuestion().setListAnswers(listAnswers.getItems());}else {
                     System.out.println("Запитання не вибрано");
                 }}
+                /*
+                * save Question
+                * */
 
                 if (listQuestion==null||listQuestion.equals(emptyQuestion)){
                     System.out.println("Список запитань порожній");
-                }else {oldValue.setListQuestions(listQuestion.getItems());}
+                }else {
+                    oldValue.setListQuestions(listQuestion.getItems());
+                }
+                /*
+                * save NameTest
+                * */
             }
             if (newValue == null){
-                newValue.setListQuestions(emptyQuestion);
-                newValue.setNameTest("");
-
+                TestName empty = new TestName("",emptyQuestion);
+                newValue = empty;
                 System.out.println("Нова назва тесті порожня");
             }
             listQuestion.setItems(newValue.getListQuestions());
+            /*
+            * load Question
+            * */
         });
 
         //  Обробник подій для списку Запитань
@@ -135,17 +241,21 @@ public class CreatePaneController {
                 }else {
                     oldValue.setListAnswers(listAnswers.getItems());
                 }
+                /*
+                * save Question
+                * */
             }
             if (newValue==null){
-                newValue.setListAnswers(emptyAnswer);
-                newValue.setTextQuestion("");
-                newValue.setNumQuestion(listQuestion.getItems().size()+1);
-
+                Question empty = new Question(listQuestion.getItems().size()+1,"",emptyAnswer);
+                newValue = empty;
                 System.out.println("Нове запиння порожнє");
 
             }
             textQuestion.setText(newValue.getTextQuestion());
             listAnswers.setItems(newValue.getListAnswers());
+            /*
+            * load Answer
+            * */
         });
 
 
