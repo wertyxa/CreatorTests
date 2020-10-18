@@ -16,26 +16,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wertyxa.Controller.CreatePaneController">
    <children>
-      <MenuBar fx:id="menuBar" layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="872.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <AnchorPane layoutX="7.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+      <AnchorPane layoutX="7.0" layoutY="-6.0" prefHeight="726.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
          <children>
             <Label layoutX="71.0" layoutY="47.0" text="Предмет">
                <font>
@@ -57,11 +38,11 @@
             <ListView fx:id="listNameTest" editable="true" layoutX="67.0" layoutY="129.0" prefHeight="399.0" prefWidth="533.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0" />
             <ComboBox id="0" fx:id="listGroup" layoutX="818.0" layoutY="43.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть групу" />
             <ComboBox fx:id="listSubject" layoutX="171.0" layoutY="44.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть предмет" />
-            <TextField fx:id="textNewNameTests" layoutX="67.0" layoutY="548.0" prefHeight="50.0" prefWidth="454.0" promptText="Введіть назву тесту" AnchorPane.leftAnchor="50.0">
+            <TextField fx:id="textNewNameTests" layoutX="50.0" layoutY="623.0" prefHeight="50.0" prefWidth="454.0" promptText="Введіть назву тесту" AnchorPane.leftAnchor="50.0">
                <font>
                   <Font name="Arial" size="15" />
                </font></TextField>
-            <Button layoutX="510.0" layoutY="560.0" mnemonicParsing="false" onAction="#addNewNameTest" text="Додати" />
+            <Button layoutX="510.0" layoutY="635.0" mnemonicParsing="false" onAction="#addNewNameTest" text="Додати" />
             <Button layoutX="1097.0" layoutY="640.0" mnemonicParsing="false" text="Button" />
             <Button layoutX="1167.0" layoutY="640.0" mnemonicParsing="false" text="Зберегти" />
             <Button layoutX="1028.0" layoutY="44.0" mnemonicParsing="false" onAction="#delSelectionGroup" text="Видалити" />
@@ -71,9 +52,28 @@
                   <Font name="Droid Serif" size="13.0" />
                </font></Button>
             <Button layoutX="479.0" layoutY="47.0" mnemonicParsing="false" onAction="#addNewSubject" text="Новий предмет" />
-            <Separator layoutY="111.0" prefHeight="10.0" prefWidth="1280.0" />
-            <Separator layoutX="623.0" orientation="VERTICAL" prefHeight="696.0" prefWidth="20.0" />
+            <Separator layoutY="111.0" prefHeight="10.0" prefWidth="1280.0" AnchorPane.bottomAnchor="616.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+            <Separator layoutX="608.0" layoutY="-30.0" orientation="VERTICAL" prefHeight="755.0" prefWidth="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="605.0" AnchorPane.rightAnchor="655.0" AnchorPane.topAnchor="0.0" />
             <Button layoutX="1184.0" layoutY="142.0" mnemonicParsing="false" onAction="#addNewQuestion" text="Нове" />
+            <MenuBar fx:id="menuBar" layoutX="5.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
          </children>
       </AnchorPane>
    </children>

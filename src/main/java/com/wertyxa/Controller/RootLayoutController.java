@@ -8,6 +8,8 @@ import com.wertyxa.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.IndexedCell;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class RootLayoutController {
@@ -43,7 +45,6 @@ public class RootLayoutController {
         loginField.setText("Adminnn");
         showCreatePaneButton.setDisable(false);
         showPassPaneButton.setDisable(false);
-
     /*
         loginField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (observable.getValue().length()>4){

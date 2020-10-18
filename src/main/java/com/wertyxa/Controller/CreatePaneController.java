@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,7 @@ public class CreatePaneController {
 
     @FXML
     private URL location;
+
 
     @FXML
     private MenuBar menuBar;
@@ -63,6 +65,10 @@ public class CreatePaneController {
 
     @FXML
     void initialize() {
+        Menu f1 = new Menu("file");
+        MenuItem menuItem = new MenuItem("1");
+        f1.getItems().add(menuItem);
+        menuBar.getMenus().add(f1);
         listSubject.setItems(emptySubject);
         listAnswers.setItems(emptyAnswer);
         listQuestion.setItems(emptyQuestion);
@@ -92,22 +98,54 @@ public class CreatePaneController {
         //  Обробник подій для списку Назв тестів
         MultipleSelectionModel<TestName> testNameSelectionModel = listNameTest.getSelectionModel();
         testNameSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue==null){
+                System.out.println("Немає поперднього Назв тесту");
+            }else {
+                /**
+                 * save
+                 */
+                if (listAnswers==null||listAnswers.equals(emptyAnswer)){
+                    System.out.println("Список відповідей порожній");
+                }
+                else {if(selectedQuestion()!=null){selectedQuestion().setListAnswers(listAnswers.getItems());}else {
+                    System.out.println("Запитання не вибрано");
+                }}
 
+                if (listQuestion==null||listQuestion.equals(emptyQuestion)){
+                    System.out.println("Список запитань порожній");
+                }else {oldValue.setListQuestions(listQuestion.getItems());}
+            }
+            if (newValue == null){
+                newValue.setListQuestions(emptyQuestion);
+                newValue.setNameTest("");
+
+                System.out.println("Нова назва тесті порожня");
+            }
+            listQuestion.setItems(newValue.getListQuestions());
         });
 
         //  Обробник подій для списку Запитань
         MultipleSelectionModel<Question> questionSelectionModel = listQuestion.getSelectionModel();
         questionSelectionModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(oldValue!=null)oldValue.setListAnswers(listAnswers.getItems());
-            if (newValue!=null) {
-                textQuestion.setText(newValue.getTextQuestion());
-                listAnswers.setItems(newValue.getListAnswers());
-                listAnswers.refresh();
+            if (oldValue==null){
+                System.out.println("немає поперенього запитання");
             }else {
-                textQuestion.setText("");
-                listAnswers.setItems(emptyAnswer);
-                listAnswers.refresh();
+                if (listAnswers==null||listAnswers.equals(emptyAnswer)){
+                    System.out.println("Список відповідей порожній");
+                }else {
+                    oldValue.setListAnswers(listAnswers.getItems());
+                }
             }
+            if (newValue==null){
+                newValue.setListAnswers(emptyAnswer);
+                newValue.setTextQuestion("");
+                newValue.setNumQuestion(listQuestion.getItems().size()+1);
+
+                System.out.println("Нове запиння порожнє");
+
+            }
+            textQuestion.setText(newValue.getTextQuestion());
+            listAnswers.setItems(newValue.getListAnswers());
         });
 
 
@@ -127,7 +165,7 @@ public class CreatePaneController {
         // === Text Answer (TextField) ===
         textAnswerCol.setCellValueFactory(new PropertyValueFactory<>("textAnswer"));
         textAnswerCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        textAnswerCol.setMinWidth(550);
+        textAnswerCol.setMinWidth(530);
 
         // On cell edit commit (for Text Answer column)
 
@@ -244,4 +282,9 @@ public class CreatePaneController {
     public void addNewQuestion(ActionEvent actionEvent) {
 
     }
+
+    private Question selectedQuestion(){return listQuestion.getSelectionModel().getSelectedItem();}
+    private TestName selectedTestName(){return listNameTest.getSelectionModel().getSelectedItem();}
+    private Group selectedGroup(){return listGroup.getSelectionModel().getSelectedItem();}
+    private Subject selectedSubject(){return listSubject.getSelectionModel().getSelectedItem();}
 }

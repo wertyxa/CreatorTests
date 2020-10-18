@@ -13,8 +13,6 @@ public class Main extends Application {
     public static void main(String[] args) {launch(args);}
     private static Stage globalStage;
     private static AnchorPane rootLayout;
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.globalStage=primaryStage;
@@ -31,6 +29,8 @@ public class Main extends Application {
         globalStage.setResizable(false);
         globalStage.show();
     }
+
+
 
     public static void loadCreateTestPane(String name) throws IOException {
         FXMLLoader loader = loadTemplate("createPane");
