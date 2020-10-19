@@ -1,5 +1,6 @@
 package com.wertyxa.Controller;
 
+import com.wertyxa.Main;
 import com.wertyxa.Model.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -8,20 +9,51 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class CreatePaneController {
+
+    @FXML
+    public Button nextQuesBut;
+
+    @FXML
+    public Button prevQuesBut;
+
+    @FXML
+    public Button prevNameTestBut;
+
+    @FXML
+    public Button nextNameTestBut;
+
+    @FXML
+    public Button delGroupBut;
+
+    @FXML
+    public Button addGroupBut;
+
+    @FXML
+    public Button delSubBut;
+
+    @FXML
+    public Button addSubBut;
+
+    @FXML
+    public Button addQueBut;
 
     @FXML
     private ResourceBundle resources;
@@ -65,6 +97,7 @@ public class CreatePaneController {
 
     @FXML
     void initialize() {
+        loadImageButton();
         Menu f1 = new Menu("file");
         MenuItem menuItem = new MenuItem("1");
         f1.getItems().add(menuItem);
@@ -384,11 +417,22 @@ public class CreatePaneController {
     }
 
     public void delSelectionSubject(ActionEvent actionEvent) {
-
+        listSubject.getItems().remove(listSubject.getSelectionModel().getSelectedIndex());
     }
 
-    public void addNewSubject(ActionEvent actionEvent) {
+    public void addNewSubject(ActionEvent actionEvent) throws IOException {
+        listSubject.getSelectionModel().clearSelection();
+        loadTemplateNewSubject();
+    }
 
+    private void loadTemplateNewSubject() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = Main.loadTemplate("newSubjet");
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.alwaysOnTopProperty();
+        stage.showAndWait();
     }
 
     public void addNewQuestion(ActionEvent actionEvent) {
@@ -399,4 +443,26 @@ public class CreatePaneController {
     private TestName selectedTestName(){return listNameTest.getSelectionModel().getSelectedItem();}
     private Group selectedGroup(){return listGroup.getSelectionModel().getSelectedItem();}
     private Subject selectedSubject(){return listSubject.getSelectionModel().getSelectedItem();}
+
+    public void setListSubject(ObservableList<Subject> listSubject) {
+        this.listSubject.setItems(listSubject);
+    }
+
+    public ObservableList<Subject> getListSubject() {
+        return listSubject.getItems();
+    }
+
+    private void loadImageButton(){
+        nextNameTestBut.graphicProperty().setValue(new ImageView(new Image("img/stD.png")));
+        prevNameTestBut.graphicProperty().setValue(new ImageView(new Image("img/stU.png")));
+        prevQuesBut.graphicProperty().setValue(new ImageView(new Image("img/stL.png")));
+        nextQuesBut.graphicProperty().setValue(new ImageView(new Image("img/stR.png")));
+
+        delGroupBut.graphicProperty().setValue(new ImageView(new Image("img/min.png")));
+        addGroupBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
+        delSubBut.graphicProperty().setValue(new ImageView(new Image("img/min.png")));
+        addSubBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
+        addQueBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
+
+    }
 }

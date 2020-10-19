@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wertyxa.Controller.NewSubjectController">
+   <children>
+      <ListView fx:id="listSubject" layoutX="42.0" layoutY="73.0" prefHeight="255.0" prefWidth="267.0" />
+      <TextField fx:id="textNewSubject" layoutX="48.0" layoutY="20.0" prefHeight="40.0" prefWidth="230.0" promptText="Введіть назву предмету" />
+      <Button layoutX="296.0" layoutY="28.0" mnemonicParsing="false" onAction="#addNewSubject" prefHeight="25.0" prefWidth="39.0" text="+" />
+      <Button layoutX="251.0" layoutY="350.0" mnemonicParsing="false" onAction="#closeAndSaveData" prefHeight="31.0" prefWidth="73.0" text="ok" />
+   </children>
+</AnchorPane>

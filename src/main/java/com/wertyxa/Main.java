@@ -1,5 +1,6 @@
 package com.wertyxa;
 
+import com.wertyxa.Controller.CreatePaneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ public class Main extends Application {
     public static void main(String[] args) {launch(args);}
     private static Stage globalStage;
     private static AnchorPane rootLayout;
+
+    private static CreatePaneController createPaneController;
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.globalStage=primaryStage;
@@ -37,9 +40,10 @@ public class Main extends Application {
         rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         globalStage.setScene(scene);
-        globalStage.setWidth(scene.getWidth());
-        globalStage.setHeight(scene.getHeight());
+        globalStage.setWidth(1280);
+        globalStage.setHeight(780);
         globalStage.show();
+        createPaneController = loader.getController();
     }
 
     public static void loadPassTestPane(String name) throws IOException {
@@ -52,9 +56,13 @@ public class Main extends Application {
         globalStage.show();
     }
 
-    private static FXMLLoader loadTemplate(String nameFile) {
+    public static FXMLLoader loadTemplate(String nameFile) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/templates/" +nameFile+".fxml"));
         return loader;
+    }
+
+    public static CreatePaneController getCreatePaneController() {
+        return createPaneController;
     }
 }
