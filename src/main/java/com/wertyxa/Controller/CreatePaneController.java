@@ -56,6 +56,21 @@ public class CreatePaneController {
     public Button addQueBut;
 
     @FXML
+    public Button addAnswer;
+
+    @FXML
+    public AnchorPane pane1;
+
+    @FXML
+    public AnchorPane pane2;
+
+    @FXML
+    public AnchorPane pane3;
+
+    @FXML
+    public AnchorPane pane4;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -97,6 +112,10 @@ public class CreatePaneController {
 
     @FXML
     void initialize() {
+        pane2.setDisable(true);
+        pane3.setDisable(true);
+        pane4.setDisable(true);
+        listAnswers.setPlaceholder(new Label("Немає відповідей"));
         loadImageButton();
         Menu f1 = new Menu("file");
         MenuItem menuItem = new MenuItem("1");
@@ -175,6 +194,9 @@ public class CreatePaneController {
                 System.out.println("Вибраний прежмет чистий");
             }
             listGroup.setItems(newValue.getListGroups());
+            pane2.setDisable(false);
+            pane3.setDisable(true);
+            pane4.setDisable(true);
         });
         //  Обробник подій для списку груп
         SingleSelectionModel<Group> groupSelectionModel = listGroup.getSelectionModel();
@@ -222,6 +244,8 @@ public class CreatePaneController {
                 System.out.println("Вибрана гупа порожня");
             }
             listNameTest.setItems(newValue.getListTestNames());
+            pane3.setDisable(false);
+            pane4.setDisable(true);
             /**
              * load NameTest
              * */
@@ -258,6 +282,7 @@ public class CreatePaneController {
                 System.out.println("Нова назва тесті порожня");
             }
             listQuestion.setItems(newValue.getListQuestions());
+            pane4.setDisable(false);
             /*
             * load Question
             * */
@@ -294,7 +319,11 @@ public class CreatePaneController {
 
         //  Обробник подій для тексту  запитання
         textQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
-            listQuestion.getSelectionModel().getSelectedItem().setTextQuestion(newValue);
+            if(selectedQuestion()==null) {
+                newValue = "";
+            }else {
+                listQuestion.getSelectionModel().getSelectedItem().setTextQuestion(newValue);
+            }
         });
         configTabelAnswer();
     }
@@ -308,7 +337,7 @@ public class CreatePaneController {
         // === Text Answer (TextField) ===
         textAnswerCol.setCellValueFactory(new PropertyValueFactory<>("textAnswer"));
         textAnswerCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        textAnswerCol.setMinWidth(530);
+        textAnswerCol.setMinWidth(505);
 
         // On cell edit commit (for Text Answer column)
 
@@ -347,6 +376,7 @@ public class CreatePaneController {
                 return cell;
             }
         });
+        rightAnswerCol.setMinWidth(30);
         listAnswers.getColumns().addAll(textAnswerCol,rightAnswerCol);
     }
 
@@ -411,9 +441,10 @@ public class CreatePaneController {
         listGroup.getItems().remove(listGroup.getSelectionModel().getSelectedIndex());
         listGroup.getSelectionModel().clearSelection();
     }
-
-    public void addNewGroup(ActionEvent actionEvent) {
-
+    //ToDo
+    public void addNewGroup(ActionEvent actionEvent) throws IOException {
+        listGroup.getSelectionModel().clearSelection();
+        loadTemplateForAddNewObject("Group");
     }
 
     public void delSelectionSubject(ActionEvent actionEvent) {
@@ -422,21 +453,40 @@ public class CreatePaneController {
 
     public void addNewSubject(ActionEvent actionEvent) throws IOException {
         listSubject.getSelectionModel().clearSelection();
-        loadTemplateNewSubject();
+        loadTemplateForAddNewObject("Subject");
     }
 
-    private void loadTemplateNewSubject() throws IOException {
+    private void loadTemplateForAddNewObject(String typeList) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = Main.loadTemplate("newSubjet");
+        FXMLLoader loader = Main.loadTemplate("newElementToList");
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.alwaysOnTopProperty();
-        stage.showAndWait();
+        NewElementController controller = loader.getController();
+        switch (typeList){
+            case "Subject":
+                controller.addSubject(listSubject.getItems());
+                stage.showAndWait();
+                break;
+            case "Group":
+                controller.addGroup(listGroup.getItems());
+                stage.showAndWait();
+                break;
+            case "Question":
+                controller.addQuestion(listQuestion.getItems());
+                stage.showAndWait();
+                break;
+            default:
+                System.out.println("error Bad type list");
+                break;
+        }
     }
-
-    public void addNewQuestion(ActionEvent actionEvent) {
-
+    //ToDo
+    public void addNewQuestion(ActionEvent actionEvent) throws IOException {
+        listQuestion.getSelectionModel().clearSelection();
+        //loadTemplateForAddNewObject("Question");
+        listQuestion.getItems().add(new Question(listQuestion.getItems().size()+1,"",FXCollections.observableArrayList()));
     }
 
     private Question selectedQuestion(){return listQuestion.getSelectionModel().getSelectedItem();}
@@ -463,6 +513,46 @@ public class CreatePaneController {
         delSubBut.graphicProperty().setValue(new ImageView(new Image("img/min.png")));
         addSubBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
         addQueBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
+        addAnswer.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
 
+    }
+
+    public void setListGroup(ObservableList<Group> items) {
+        this.listGroup.setItems(items);
+    }
+
+    public void setListQuestion(ObservableList<Question> items) {
+        this.listQuestion.setItems(items);
+    }
+
+    public void addNewAnswer(ActionEvent actionEvent) {
+        listAnswers.getItems().add(new Answer("",false));
+    }
+
+    public void selNextQuestion(ActionEvent actionEvent) {
+        MultipleSelectionModel<Question> selectionModel = listQuestion.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedItem().getNumQuestion()==listQuestion.getItems().size()){
+                selectionModel.selectFirst();
+            }else {
+                selectionModel.selectNext();
+            }
+        }
+    }
+
+    public void selPevQuestion(ActionEvent actionEvent) {
+        MultipleSelectionModel<Question> selectionModel = listQuestion.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedItem().getNumQuestion()==1){
+                System.out.println(listQuestion.getItems().size());
+                selectionModel.selectLast();
+            }else {
+                selectionModel.selectPrevious();
+            }
+        }
     }
 }
