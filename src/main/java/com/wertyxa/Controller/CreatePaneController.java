@@ -19,6 +19,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -98,6 +99,15 @@ public class CreatePaneController {
     @FXML
     private TextField textNewNameTests;
 
+    @FXML
+    private MenuItem delSelAnswer;
+
+    @FXML
+    private MenuItem delSelQuestion;
+
+    @FXML
+    private MenuItem delSelNameTest;
+
 
     @FXML
     private ListView<TestName> listNameTest;
@@ -117,10 +127,6 @@ public class CreatePaneController {
         pane4.setDisable(true);
         listAnswers.setPlaceholder(new Label("Немає відповідей"));
         loadImageButton();
-        Menu f1 = new Menu("file");
-        MenuItem menuItem = new MenuItem("1");
-        f1.getItems().add(menuItem);
-        menuBar.getMenus().add(f1);
         listSubject.setItems(emptySubject);
         listAnswers.setItems(emptyAnswer);
         listQuestion.setItems(emptyQuestion);
@@ -515,6 +521,18 @@ public class CreatePaneController {
         addQueBut.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
         addAnswer.graphicProperty().setValue(new ImageView(new Image("img/plus.png")));
 
+        nextNameTestBut.setBackground(Background.EMPTY);
+        prevNameTestBut.setBackground(Background.EMPTY);
+        prevQuesBut.setBackground(Background.EMPTY);
+        nextQuesBut.setBackground(Background.EMPTY);
+
+        delGroupBut.setBackground(Background.EMPTY);
+        addGroupBut.setBackground(Background.EMPTY);
+        delSubBut.setBackground(Background.EMPTY);
+        addSubBut.setBackground(Background.EMPTY);
+        addQueBut.setBackground(Background.EMPTY);
+        addAnswer.setBackground(Background.EMPTY);
+
     }
 
     public void setListGroup(ObservableList<Group> items) {
@@ -554,5 +572,49 @@ public class CreatePaneController {
                 selectionModel.selectPrevious();
             }
         }
+    }
+
+    public void selUpTestN(ActionEvent actionEvent) {
+        MultipleSelectionModel<TestName> selectionModel = listNameTest.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedIndex()==0){
+                selectionModel.selectLast();
+            }else {
+                selectionModel.selectPrevious();
+            }
+        }
+    }
+
+    public void selDownTestN(ActionEvent actionEvent) {
+        MultipleSelectionModel<TestName> selectionModel = listNameTest.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedIndex()==(listNameTest.getItems().size()-1)){
+                selectionModel.selectFirst();
+            }else {
+                selectionModel.selectNext();
+            }
+        }
+    }
+
+    public void delSelA() {
+        TableView.TableViewSelectionModel<Answer> selectionModel = listAnswers.getSelectionModel();
+        if(selectionModel.getSelectedItem()!=null)
+        listAnswers.getItems().remove(selectionModel.getSelectedIndex());
+    }
+
+    public void delSelNT() {
+        MultipleSelectionModel<TestName> selectionModel = listNameTest.getSelectionModel();
+        if(selectionModel.getSelectedItem()!=null)
+        listNameTest.getItems().remove(selectionModel.getSelectedIndex());
+    }
+
+    public void delSelQ() {
+        MultipleSelectionModel<Question> selectionModel = listQuestion.getSelectionModel();
+        if(selectionModel.getSelectedItem()!=null)
+        listQuestion.getItems().remove(selectionModel.getSelectedIndex());
     }
 }
