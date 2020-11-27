@@ -132,7 +132,7 @@ public class CreatePaneController {
         listQuestion.setItems(emptyQuestion);
         listNameTest.setItems(emptyTestName);
         listGroup.setItems(emptyGroups);
-        getAllList();
+        allTests = getAllList();
         listSubject.setItems(allTests.getListSubject());
        // listSubject.setEditable(true);
       //  listGroup.setEditable(true);
@@ -386,11 +386,16 @@ public class CreatePaneController {
         listAnswers.getColumns().addAll(textAnswerCol,rightAnswerCol);
     }
 
-    private void getAllList() {
+    public AllTests getAllList() {
+        AllTests allTests = new AllTests();
         allTests.setListSubject(FXCollections.observableArrayList(
                 new Subject("Math",FXCollections.observableArrayList(
                         new Group("ОПЗ-16",FXCollections.observableArrayList(
-                                new TestName("Трикутники",FXCollections.observableArrayList()),
+                                new TestName("Трикутники",FXCollections.observableArrayList(
+                                        new Question(1,"231231",FXCollections.observableArrayList()),
+                                        new Question(2,"43",FXCollections.observableArrayList()),
+                                        new Question(3,"54643",FXCollections.observableArrayList())
+                                        )),
                                 new TestName("Прямокутники",FXCollections.observableArrayList()),
                                 new TestName("Фігури",FXCollections.observableArrayList())
                         )),
@@ -436,6 +441,7 @@ public class CreatePaneController {
                                 new TestName("Історія1",FXCollections.observableArrayList()),
                                 new TestName("Історія13",FXCollections.observableArrayList())
                         ))))));
+        return allTests;
     }
 
     public void addNewNameTest(ActionEvent actionEvent) {

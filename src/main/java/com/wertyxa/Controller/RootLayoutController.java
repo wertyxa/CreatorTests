@@ -37,7 +37,7 @@ public class RootLayoutController {
 
     @FXML
     void showPassPane(ActionEvent event) throws IOException {
-        Main.loadPassTestPane(loginField.getText());
+        Main.loadWindowParamTests();
     }
 
     @FXML

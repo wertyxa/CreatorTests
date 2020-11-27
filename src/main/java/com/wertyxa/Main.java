@@ -1,6 +1,8 @@
 package com.wertyxa;
 
 import com.wertyxa.Controller.CreatePaneController;
+import com.wertyxa.Controller.PassPaneController;
+import com.wertyxa.Model.TestName;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -46,14 +48,28 @@ public class Main extends Application {
         createPaneController = loader.getController();
     }
 
-    public static void loadPassTestPane(String name) throws IOException {
+    public static void loadWindowParamTests() throws IOException {
+        FXMLLoader loader = loadTemplate("paramTests");
+        rootLayout = loader.load();
+        Scene scene = new Scene(rootLayout);
+        globalStage.setScene(scene);
+        globalStage.show();
+
+    }
+
+    public static void loadPassTestPane(TestName selectedItem) throws IOException {
         FXMLLoader loader = loadTemplate("passPane");
         rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         globalStage.setScene(scene);
-        globalStage.setWidth(scene.getWidth());
-        globalStage.setHeight(scene.getHeight());
-        globalStage.show();
+        globalStage.setWidth(rootLayout.getWidth());
+        globalStage.setHeight(rootLayout.getHeight());
+        System.out.println(rootLayout.getWidth()+" "+rootLayout.getHeight());
+        globalStage.setTitle("Brains - "+selectedItem.getNameTest());
+
+        PassPaneController ct =loader.getController();
+        ct.loadListQuestion(selectedItem.getListQuestions());
+        //globalStage.show();
     }
 
     public static FXMLLoader loadTemplate(String nameFile) {
