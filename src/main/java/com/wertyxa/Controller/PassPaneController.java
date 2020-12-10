@@ -9,11 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
 
 public class PassPaneController {
 
@@ -22,6 +24,9 @@ public class PassPaneController {
 
     @FXML
     private URL location;
+
+    @FXML
+    public VBox listAnswers;
 
     @FXML
     private ListView<Question> listQuestion;
@@ -37,17 +42,51 @@ public class PassPaneController {
 
     @FXML
     void nextQuestion(ActionEvent event) {
+        MultipleSelectionModel<Question> selectionModel = listQuestion.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedItem().getNumQuestion()==listQuestion.getItems().size()){
+                selectionModel.selectFirst();
+            }else {
+                selectionModel.selectNext();
+            }
+        }
 
     }
 
     @FXML
     void prevQuestion(ActionEvent event) {
+        MultipleSelectionModel<Question> selectionModel = listQuestion.getSelectionModel();
+        if (selectionModel.getSelectedItem()==null){
+            selectionModel.selectFirst();
+        }else {
+            if (selectionModel.getSelectedItem().getNumQuestion()==1){
+                System.out.println(listQuestion.getItems().size());
+                selectionModel.selectLast();
+            }else {
+                selectionModel.selectPrevious();
+            }
+        }
 
     }
 
     @FXML
     void initialize() {
         loadButtonFunc();
+
+        listQuestion.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue)
+                        -> {
+            if (newValue==null){
+                return;
+            }else {
+                if (!newValue.getListAnswers().isEmpty()){
+
+                }
+            }
+        });
     }
 
     private void loadButtonFunc() {

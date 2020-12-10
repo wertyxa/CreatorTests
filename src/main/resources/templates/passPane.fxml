@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wertyxa.Controller.PassPaneController">
@@ -15,10 +16,13 @@
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Label>
-            <ListView fx:id="listQuestion" layoutX="31.0" layoutY="56.0" orientation="HORIZONTAL" prefHeight="75.0" prefWidth="813.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="55.0" />
+            <ListView fx:id="listQuestion" editable="true" layoutX="26.0" layoutY="54.0" orientation="HORIZONTAL" prefHeight="75.0" prefWidth="813.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="54.0" />
          </children></AnchorPane>
-      <AnchorPane fx:id="answersPane" layoutX="85.0" layoutY="230.0" prefHeight="360.0" prefWidth="723.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" />
-      <Button fx:id="prevQuestionBut" layoutX="22.0" layoutY="340.0" mnemonicParsing="false" onAction="#prevQuestion" AnchorPane.leftAnchor="10.0" />
-      <Button fx:id="nextQuestionBut" layoutX="856.0" layoutY="340.0" mnemonicParsing="false" onAction="#nextQuestion" AnchorPane.rightAnchor="10.0" />
+      <AnchorPane fx:id="answersPane" layoutX="85.0" layoutY="230.0" prefHeight="360.0" prefWidth="723.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0">
+         <children>
+            <VBox fx:id="listAnswers" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="730.0" spacing="30.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+         </children></AnchorPane>
+      <Button fx:id="prevQuestionBut" layoutX="22.0" layoutY="340.0" mnemonicParsing="false" onAction="#prevQuestion" prefHeight="30.0" prefWidth="40.0" AnchorPane.leftAnchor="10.0" />
+      <Button fx:id="nextQuestionBut" layoutX="856.0" layoutY="340.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="10.0" />
    </children>
 </AnchorPane>

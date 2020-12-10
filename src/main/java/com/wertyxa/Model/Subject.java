@@ -2,6 +2,10 @@ package com.wertyxa.Model;
 
 import javafx.collections.ObservableList;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Subject {
     private String nameSubject;
     private ObservableList<Group> listGroups;
@@ -13,7 +17,6 @@ public class Subject {
         this.nameSubject = nameSubject;
         this.listGroups = listGroups;
     }
-
     public String getNameSubject() {
         return nameSubject;
     }
@@ -21,7 +24,6 @@ public class Subject {
     public void setNameSubject(String nameSubject) {
         this.nameSubject = nameSubject;
     }
-
     public ObservableList<Group> getListGroups() {
         return listGroups;
     }

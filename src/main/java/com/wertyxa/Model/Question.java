@@ -2,6 +2,13 @@ package com.wertyxa.Model;
 
 import javafx.collections.ObservableList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Question {
     private int numQuestion;
     private String textQuestion;
@@ -19,7 +26,6 @@ public class Question {
     public Question(int numQues) {
         this.numQuestion = numQues;
     }
-
     public String getTextQuestion() {
         return textQuestion;
     }
@@ -27,7 +33,6 @@ public class Question {
     public void setTextQuestion(String textQuestion) {
         this.textQuestion = textQuestion;
     }
-
     public ObservableList<Answer> getListAnswers() {
         return listAnswers;
     }
@@ -35,7 +40,6 @@ public class Question {
     public void setListAnswers(ObservableList<Answer> listAnswers) {
         this.listAnswers = listAnswers;
     }
-
 
     public int getNumQuestion() {
         return numQuestion;
