@@ -4,6 +4,7 @@ import com.wertyxa.Controller.CreatePaneController;
 import com.wertyxa.Controller.PassPaneController;
 import com.wertyxa.Model.TestName;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -68,7 +69,7 @@ public class Main extends Application {
         globalStage.setTitle("Brains - "+selectedItem.getNameTest());
 
         PassPaneController ct =loader.getController();
-        ct.loadListQuestion(selectedItem.getListQuestions());
+        ct.loadListQuestion(FXCollections.observableList(selectedItem.getListQuestions()));
         //globalStage.show();
     }
 

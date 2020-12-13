@@ -133,7 +133,7 @@ public class CreatePaneController {
         listNameTest.setItems(emptyTestName);
         listGroup.setItems(emptyGroups);
         allTests = getAllList();
-        listSubject.setItems(allTests.getListSubject());
+        listSubject.setItems(FXCollections.observableList(allTests.getListSubject()));
        // listSubject.setEditable(true);
       //  listGroup.setEditable(true);
 
@@ -199,7 +199,7 @@ public class CreatePaneController {
                 newValue=empty;
                 System.out.println("Вибраний прежмет чистий");
             }
-            listGroup.setItems(newValue.getListGroups());
+            listGroup.setItems(FXCollections.observableList(newValue.getListGroups()));
             pane2.setDisable(false);
             pane3.setDisable(true);
             pane4.setDisable(true);
@@ -249,7 +249,7 @@ public class CreatePaneController {
                 newValue=empty;
                 System.out.println("Вибрана гупа порожня");
             }
-            listNameTest.setItems(newValue.getListTestNames());
+            listNameTest.setItems(FXCollections.observableList(newValue.getListTestNames()));
             pane3.setDisable(false);
             pane4.setDisable(true);
             /**
@@ -287,7 +287,7 @@ public class CreatePaneController {
                 newValue = empty;
                 System.out.println("Нова назва тесті порожня");
             }
-            listQuestion.setItems(newValue.getListQuestions());
+            listQuestion.setItems(FXCollections.observableList(newValue.getListQuestions()));
             pane4.setDisable(false);
             /*
             * load Question
@@ -316,7 +316,7 @@ public class CreatePaneController {
 
             }
             textQuestion.setText(newValue.getTextQuestion());
-            listAnswers.setItems(newValue.getListAnswers());
+            listAnswers.setItems(FXCollections.observableList(newValue.getListAnswers()));
             /*
             * load Answer
             * */

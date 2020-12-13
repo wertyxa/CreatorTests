@@ -19,32 +19,32 @@
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane fx:id="pane1" layoutX="3.0" layoutY="24.0" prefHeight="89.0" prefWidth="610.0" AnchorPane.bottomAnchor="635.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="25.0">
+            <AnchorPane fx:id="pane1" layoutX="3.0" layoutY="24.0" prefHeight="89.0" prefWidth="610.0" AnchorPane.bottomAnchor="635.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="35.0">
                <children>
-                  <Label layoutX="86.0" layoutY="31.0" text="Предмет">
+                  <Label layoutX="86.0" layoutY="31.0" text="Предмет" AnchorPane.topAnchor="25.0">
                      <font>
                         <Font name="Hack Regular" size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="listSubject" layoutX="186.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть предмет" />
-                  <Button fx:id="delSubBut" layoutX="397.0" layoutY="25.0" mnemonicParsing="false" onAction="#delSelectionSubject" prefHeight="30.0" prefWidth="30.0">
+                  <ComboBox fx:id="listSubject" layoutX="186.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть предмет" AnchorPane.topAnchor="25.0" />
+                  <Button fx:id="delSubBut" layoutX="397.0" layoutY="25.0" mnemonicParsing="false" onAction="#delSelectionSubject" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="Droid Serif" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addSubBut" layoutX="455.0" layoutY="25.0" mnemonicParsing="false" onAction="#addNewSubject" prefHeight="30.0" prefWidth="30.0" />
+                  <Button fx:id="addSubBut" layoutX="455.0" layoutY="25.0" mnemonicParsing="false" onAction="#addNewSubject" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="20.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="pane2" layoutX="615.0" layoutY="25.0" prefHeight="89.0" prefWidth="665.0" AnchorPane.bottomAnchor="635.0" AnchorPane.leftAnchor="615.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+            <AnchorPane fx:id="pane2" layoutX="615.0" layoutY="25.0" prefHeight="89.0" prefWidth="665.0" AnchorPane.bottomAnchor="635.0" AnchorPane.leftAnchor="615.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
                <children>
-                  <Label layoutX="123.0" layoutY="33.0" text="Група">
+                  <Label layoutX="123.0" layoutY="33.0" text="Група" AnchorPane.topAnchor="25.0">
                      <font>
                         <Font name="Hack Regular" size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox id="0" fx:id="listGroup" layoutX="202.0" layoutY="29.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть групу" AnchorPane.topAnchor="30.0" />
-                  <Button fx:id="delGroupBut" layoutX="412.0" layoutY="24.0" mnemonicParsing="false" onAction="#delSelectionGroup" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="24.0" />
-                  <Button fx:id="addGroupBut" layoutX="474.0" layoutY="25.0" mnemonicParsing="false" onAction="#addNewGroup" prefHeight="30.0" prefWidth="30.0" />
+                  <ComboBox id="0" fx:id="listGroup" layoutX="202.0" layoutY="29.0" prefHeight="30.0" prefWidth="200.0" promptText="Виберіть групу" AnchorPane.topAnchor="25.0" />
+                  <Button fx:id="delGroupBut" layoutX="412.0" layoutY="24.0" mnemonicParsing="false" onAction="#delSelectionGroup" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="20.0" />
+                  <Button fx:id="addGroupBut" layoutX="474.0" layoutY="25.0" mnemonicParsing="false" onAction="#addNewGroup" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="20.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="pane4" layoutX="613.0" layoutY="102.0" prefHeight="620.0" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="615.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0">

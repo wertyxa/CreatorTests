@@ -1,11 +1,8 @@
 package com.wertyxa.Model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name = "Answer")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "answer")
 public class Answer {
     private String textAnswer;
     private boolean rightAnswer;
@@ -16,13 +13,15 @@ public class Answer {
         this.textAnswer = textAnswer;
         this.rightAnswer = rightAnswer;
     }
-    public String getTextAnswer() {
-        return textAnswer;
-    }
-
     public void setTextAnswer(String textAnswer) {
         this.textAnswer = textAnswer;
     }
+
+    @XmlElement
+    public String getTextAnswer() {
+        return textAnswer;
+    }
+    @XmlElement
     public boolean isRightAnswer() {
         return rightAnswer;
     }

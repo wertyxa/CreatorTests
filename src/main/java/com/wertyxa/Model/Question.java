@@ -1,18 +1,16 @@
 package com.wertyxa.Model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
+import java.util.List;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "question")
 public class Question {
     private int numQuestion;
     private String textQuestion;
-    private ObservableList<Answer> listAnswers;
+    private ObservableList<Answer> listAnswers = FXCollections.observableArrayList();
 
     public Question() {
     }
@@ -26,6 +24,7 @@ public class Question {
     public Question(int numQues) {
         this.numQuestion = numQues;
     }
+    @XmlElement
     public String getTextQuestion() {
         return textQuestion;
     }
@@ -33,14 +32,15 @@ public class Question {
     public void setTextQuestion(String textQuestion) {
         this.textQuestion = textQuestion;
     }
-    public ObservableList<Answer> getListAnswers() {
+    @XmlElements({@XmlElement(name = "answer", type = Answer.class)})
+    public List<Answer> getListAnswers() {
         return listAnswers;
     }
 
     public void setListAnswers(ObservableList<Answer> listAnswers) {
         this.listAnswers = listAnswers;
     }
-
+    @XmlAttribute
     public int getNumQuestion() {
         return numQuestion;
     }
@@ -48,6 +48,8 @@ public class Question {
     public void setNumQuestion(int numQuestion) {
         this.numQuestion = numQuestion;
     }
+
+
 
     @Override
     public String toString() {

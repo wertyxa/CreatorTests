@@ -1,14 +1,15 @@
 package com.wertyxa.Model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.xml.bind.annotation.*;
+import java.util.List;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "subject")
 public class Subject {
     private String nameSubject;
-    private ObservableList<Group> listGroups;
+    private ObservableList<Group> listGroups = FXCollections.observableArrayList();
 
     public Subject() {
     }
@@ -17,6 +18,7 @@ public class Subject {
         this.nameSubject = nameSubject;
         this.listGroups = listGroups;
     }
+    @XmlAttribute
     public String getNameSubject() {
         return nameSubject;
     }
@@ -24,7 +26,8 @@ public class Subject {
     public void setNameSubject(String nameSubject) {
         this.nameSubject = nameSubject;
     }
-    public ObservableList<Group> getListGroups() {
+    @XmlElements({@XmlElement(name = "group",type = Group.class)})
+    public List<Group> getListGroups() {
         return listGroups;
     }
 

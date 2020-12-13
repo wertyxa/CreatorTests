@@ -48,7 +48,7 @@ public class ParamTestsController {
         AllTests tests = new AllTests();
         tests= new CreatePaneController().getAllList();
 
-        listSubjects.setItems(tests.getListSubject());
+        listSubjects.setItems(FXCollections.observableList(tests.getListSubject()));
 
         SingleSelectionModel<Subject> selectionModelSubject = listSubjects.getSelectionModel();
         selectionModelSubject.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -59,7 +59,7 @@ public class ParamTestsController {
                 listNamesTests.setDisable(true);
                 startTestBut.setDisable(true);
 
-                listGroups.setItems(newValue.getListGroups());
+                listGroups.setItems(FXCollections.observableList(newValue.getListGroups()));
                 listGroups.setDisable(false);
             }
         });
@@ -70,7 +70,7 @@ public class ParamTestsController {
             }else {
                 startTestBut.setDisable(true);
 
-                listNamesTests.setItems(newValue.getListTestNames());
+                listNamesTests.setItems(FXCollections.observableList(newValue.getListTestNames()));
                 listNamesTests.setDisable(false);
             }
         });
