@@ -3,13 +3,14 @@ package com.wertyxa.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.wertyxa.Model.Answer;
 import com.wertyxa.Model.Question;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.control.*;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -83,6 +84,7 @@ public class PassPaneController {
                 return;
             }else {
                 if (!newValue.getListAnswers().isEmpty()){
+                    CheckBox n = new CheckBox();
 
                 }
             }

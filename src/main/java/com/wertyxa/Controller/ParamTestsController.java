@@ -1,5 +1,6 @@
 package com.wertyxa.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import com.wertyxa.Model.AllTests;
 import com.wertyxa.Model.Group;
 import com.wertyxa.Model.Subject;
 import com.wertyxa.Model.TestName;
+import com.wertyxa.utils.XmlAdapter;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,8 +47,7 @@ public class ParamTestsController {
 
     @FXML
     void initialize() {
-        AllTests tests = new AllTests();
-        tests= new CreatePaneController().getAllList();
+        AllTests tests = XmlAdapter.convertXmlToData(new File("/home/wertxa/dataXml/data.xml"));
 
         listSubjects.setItems(FXCollections.observableList(tests.getListSubject()));
 
