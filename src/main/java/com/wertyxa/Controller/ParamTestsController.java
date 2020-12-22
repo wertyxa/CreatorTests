@@ -1,10 +1,5 @@
 package com.wertyxa.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.wertyxa.Main;
 import com.wertyxa.Model.AllTests;
 import com.wertyxa.Model.Group;
@@ -12,20 +7,18 @@ import com.wertyxa.Model.Subject;
 import com.wertyxa.Model.TestName;
 import com.wertyxa.utils.XmlAdapter;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ParamTestsController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private ChoiceBox<Subject> listSubjects;
@@ -43,14 +36,19 @@ public class ParamTestsController {
     void startTest() throws IOException {
 
         Main.loadPassTestPane(listNamesTests.getSelectionModel().getSelectedItem());
+        startTestBut.getScene().getWindow().hide();
     }
 
     @FXML
     void initialize() {
-        AllTests tests = XmlAdapter.convertXmlToData(new File("/home/wertxa/dataXml/data.xml"));
+        AllTests tests = XmlAdapter.convertXmlToData(new File(Main.pathName));
 
-        listSubjects.setItems(FXCollections.observableList(tests.getListSubject()));
-
+        try {
+            listSubjects.setItems(FXCollections.observableList(tests.getListSubject()));
+        }catch (NullPointerException n){
+            listSubjects.setItems(FXCollections.observableArrayList());
+            n.printStackTrace();
+        }
         SingleSelectionModel<Subject> selectionModelSubject = listSubjects.getSelectionModel();
         selectionModelSubject.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue==null){

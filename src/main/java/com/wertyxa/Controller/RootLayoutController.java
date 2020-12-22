@@ -1,5 +1,6 @@
 package com.wertyxa.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.IndexedCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class RootLayoutController {
 
@@ -33,11 +36,33 @@ public class RootLayoutController {
     @FXML
     void showCreatePane(ActionEvent event) throws IOException {
         Main.loadCreateTestPane(loginField.getText());
+        closeWindow();
     }
 
     @FXML
     void showPassPane(ActionEvent event) throws IOException {
-        Main.loadWindowParamTests();
+        if (Main.pathName.equals("")){
+            File file = openXmlFile();
+            if (file!=null){
+                Main.pathName=file.getAbsolutePath();
+                Main.loadWindowParamTests();
+                closeWindow();
+            }
+        }
+    }
+    private File openXmlFile(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Xml Data File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("XML","*.xml"),
+                new FileChooser.ExtensionFilter("ALL","*.*"));
+        return fileChooser.showOpenDialog(new Stage());
+    }
+
+
+    void closeWindow(){
+        showCreatePaneButton.getScene().getWindow().hide();
     }
 
     @FXML

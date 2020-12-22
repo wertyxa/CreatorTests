@@ -1,9 +1,5 @@
 package com.wertyxa.Controller;
 
-import java.net.URL;
-import java.util.Iterator;
-import java.util.ResourceBundle;
-
 import com.wertyxa.Main;
 import com.wertyxa.Model.Group;
 import com.wertyxa.Model.Question;
@@ -15,6 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import java.net.URL;
+import java.util.Iterator;
+import java.util.ResourceBundle;
 
 public class NewElementController<T> {
 
@@ -46,12 +46,15 @@ public class NewElementController<T> {
         switch (typeElement){
             case "Subject":
                 subjectList.getItems().add(new Subject(textNewObject.getText(),FXCollections.observableArrayList()));
+                textNewObject.clear();
                 break;
             case "Group":
                 groupList.getItems().add(new Group(textNewObject.getText(),FXCollections.observableArrayList()));
+                textNewObject.clear();
                 break;
             case "Question":
                 questionList.getItems().add(new Question(questionList.getItems().size()+1,"",FXCollections.observableArrayList()));
+                textNewObject.clear();
             default:
                 System.out.println("Not Type List");
         }

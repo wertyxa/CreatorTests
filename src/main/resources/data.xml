@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Data>
+    <subject nameSubject="Math">
+        <group groupName="ОПЗ-16">
+            <testName nameTest="Трикутники">
+                <question numQuestion="1">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>231231</textQuestion>
+                </question>
+                <question numQuestion="2">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>43</textQuestion>
+                </question>
+                <question numQuestion="3">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>54643</textQuestion>
+                </question>
+            </testName>
+            <testName nameTest="Прямокутники">
+                <question numQuestion="1">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>231231</textQuestion>
+                </question>
+                <question numQuestion="2">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>43</textQuestion>
+                </question>
+                <question numQuestion="3">
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>false</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <answer>
+                        <rightAnswer>true</rightAnswer>
+                        <textAnswer>qwerty?</textAnswer>
+                    </answer>
+                    <textQuestion>54643</textQuestion>
+                </question>
+            </testName>
+            <testName nameTest="Фігури">
+                <question numQuestion="1">
+                    <textQuestion>231231</textQuestion>
+                </question>
+                <question numQuestion="2">
+                    <textQuestion>43</textQuestion>
+                </question>
+                <question numQuestion="3">
+                    <textQuestion>54643</textQuestion>
+                </question>
+            </testName>
+        </group>
+        <group groupName="ЗВК-25">
+            <testName nameTest="Фігури"/>
+            <testName nameTest="Трикутники"/>
+            <testName nameTest="Прямокутники"/>
+        </group>
+        <group groupName="ВШП-41">
+            <testName nameTest="Прямокутники"/>
+            <testName nameTest="Фігури"/>
+            <testName nameTest="Трикутники"/>
+        </group>
+    </subject>
+    <subject nameSubject="Ukrainian lang">
+        <group groupName="ОПЗ-12">
+            <testName nameTest="Словосполучники"/>
+            <testName nameTest="Прості речення"/>
+            <testName nameTest="Складені речення"/>
+        </group>
+        <group groupName="ЗВК-22">
+            <testName nameTest="Складені речення"/>
+            <testName nameTest="Прості речення"/>
+            <testName nameTest="Словосполучники"/>
+        </group>
+        <group groupName="ВШП-42">
+            <testName nameTest="Прості речення"/>
+            <testName nameTest="Складені речення"/>
+            <testName nameTest="Словосполучники"/>
+        </group>
+    </subject>
+    <subject nameSubject="History">
+        <group groupName="ОПЗ-13">
+            <testName nameTest="Історія1"/>
+            <testName nameTest="Історія12"/>
+            <testName nameTest="Історія13"/>
+        </group>
+        <group groupName="ЗВК-23">
+            <testName nameTest="Історія13"/>
+            <testName nameTest="Історія12"/>
+            <testName nameTest="Історія1"/>
+        </group>
+        <group groupName="ВШП-43">
+            <testName nameTest="Історія12"/>
+            <testName nameTest="Історія1"/>
+            <testName nameTest="Історія13"/>
+        </group>
+    </subject>
+</Data>

@@ -17,7 +17,7 @@ public class AllTests {
         this.listSubject = listSubject;
     }
     @XmlElements({@XmlElement(name = "subject", type = Subject.class)})
-    public List<Subject> getListSubject() {
+    public ObservableList<Subject> getListSubject() {
         return listSubject;
     }
 

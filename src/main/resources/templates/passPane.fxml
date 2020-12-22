@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -18,13 +19,19 @@
             </Label>
             <ListView fx:id="listQuestion" editable="true" layoutX="26.0" layoutY="54.0" orientation="HORIZONTAL" prefHeight="75.0" prefWidth="813.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="54.0" />
          </children></AnchorPane>
-      <AnchorPane fx:id="answersPane" layoutX="85.0" layoutY="230.0" prefHeight="360.0" prefWidth="723.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0">
+      <AnchorPane fx:id="answersPane" layoutX="85.0" layoutY="230.0" prefHeight="360.0" prefWidth="723.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="200.0">
          <children>
-            <VBox fx:id="listAnswers" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="730.0" spacing="30.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" >
-
-            </VBox>
+            <VBox fx:id="listAnswers" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="730.0" spacing="30.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+               <padding>
+                  <Insets left="40.0" />
+               </padding></VBox>
          </children></AnchorPane>
       <Button fx:id="prevQuestionBut" layoutX="22.0" layoutY="340.0" mnemonicParsing="false" onAction="#prevQuestion" prefHeight="30.0" prefWidth="40.0" AnchorPane.leftAnchor="10.0" />
       <Button fx:id="nextQuestionBut" layoutX="856.0" layoutY="340.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="10.0" />
+      <Button layoutX="424.0" layoutY="550.0" mnemonicParsing="false" onAction="#getResult" text="ЗАВЕРШИТИ">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

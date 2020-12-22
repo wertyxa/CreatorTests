@@ -17,17 +17,20 @@ public class Main extends Application {
     public static void main(String[] args) {launch(args);}
     private static Stage globalStage;
     private static AnchorPane rootLayout;
+    public static String pathName = "";
 
     private static CreatePaneController createPaneController;
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.globalStage=primaryStage;
         this.globalStage.setTitle("Brains");
-
+        globalStage.setOnCloseRequest(event -> {
+            System.out.println("Exit");
+        });
         initRootLayout();
     }
 
-    private void initRootLayout() throws IOException {
+    private static void initRootLayout() throws IOException {
         FXMLLoader loader = loadTemplate("rootLayout");
         rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
@@ -40,37 +43,63 @@ public class Main extends Application {
 
     public static void loadCreateTestPane(String name) throws IOException {
         FXMLLoader loader = loadTemplate("createPane");
-        rootLayout = loader.load();
-        Scene scene = new Scene(rootLayout);
-        globalStage.setScene(scene);
-        globalStage.setWidth(1280);
-        globalStage.setHeight(780);
-        globalStage.show();
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setOnCloseRequest(event -> {
+            stage.close();
+            try {
+                initRootLayout();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        stage.setScene(scene);
+        stage.show();
         createPaneController = loader.getController();
     }
 
     public static void loadWindowParamTests() throws IOException {
         FXMLLoader loader = loadTemplate("paramTests");
-        rootLayout = loader.load();
-        Scene scene = new Scene(rootLayout);
-        globalStage.setScene(scene);
-        globalStage.show();
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setOnCloseRequest(event -> {
+            stage.close();
+            try {
+                initRootLayout();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        stage.setScene(scene);
+        stage.show();
+
 
     }
 
     public static void loadPassTestPane(TestName selectedItem) throws IOException {
         FXMLLoader loader = loadTemplate("passPane");
-        rootLayout = loader.load();
-        Scene scene = new Scene(rootLayout);
-        globalStage.setScene(scene);
-        globalStage.setWidth(rootLayout.getWidth());
-        globalStage.setHeight(rootLayout.getHeight());
-        System.out.println(rootLayout.getWidth()+" "+rootLayout.getHeight());
-        globalStage.setTitle("Brains - "+selectedItem.getNameTest());
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        System.out.println(root.getWidth()+" "+root.getHeight());
+        stage.setTitle("Brains - "+selectedItem.getNameTest());
 
         PassPaneController ct =loader.getController();
         ct.loadListQuestion(FXCollections.observableList(selectedItem.getListQuestions()));
-        //globalStage.show();
+        stage.show();
+        stage.setOnCloseRequest(event -> {
+            stage.close();
+            try {
+                loadWindowParamTests();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     public static FXMLLoader loadTemplate(String nameFile) {

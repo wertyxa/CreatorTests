@@ -1,16 +1,14 @@
 package com.wertyxa.tests;
 
-import com.wertyxa.Controller.CreatePaneController;
 import com.wertyxa.Model.*;
 import com.wertyxa.utils.XmlAdapter;
 import javafx.collections.FXCollections;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
 
 public class Test1 {
     public static void main(String[] args) throws JAXBException {
-        String filename = "/home/wertxa/dataXml/data.xml";
+        String filename = "data.xml";
 
         AllTests allTests = new AllTests();
         allTests.setListSubject(FXCollections.observableArrayList(

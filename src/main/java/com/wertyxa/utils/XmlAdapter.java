@@ -11,7 +11,7 @@ import java.io.File;
 public class XmlAdapter {
     public XmlAdapter() {
     }
-    public static AllTests convertXmlToData(File file){
+    public static AllTests convertXmlToData(File file)throws NullPointerException, IllegalArgumentException{
         try {
             JAXBContext context = JAXBContext.newInstance(AllTests.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
