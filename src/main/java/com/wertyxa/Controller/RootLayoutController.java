@@ -46,9 +46,11 @@ public class RootLayoutController {
             if (file!=null){
                 Main.pathName=file.getAbsolutePath();
                 Main.loadWindowParamTests();
-                closeWindow();
             }
+        }else {
+            Main.loadWindowParamTests();
         }
+        closeWindow();
     }
     private File openXmlFile(){
         FileChooser fileChooser = new FileChooser();
